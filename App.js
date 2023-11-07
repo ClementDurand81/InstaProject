@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, Button, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Button, ScrollView, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Posts from './components/Posts';
 import ProfileDetail from './Components/ProfilDetails';
+import AddPostScreen from './Components/Ajout';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 function HomeScreen() {
@@ -30,7 +31,7 @@ function SearchScreen({ navigation }) {
         value={searchText}
         onChangeText={(text) => setSearchText(text)}
       />
-      <Button title="Rechercher" onPress={handleSearch} />
+      <Button title="Rechercher" onPress={handleSearch} color="blue" />
     </View>
   );
 }
@@ -46,9 +47,7 @@ function ProfileScreen() {
 function MiddleScreen() {
   return (
     <View style={styles.middleContainer}>
-      <View style={styles.addButton}>
-        <Ionicons name="add-circle" size={30} color="white" />
-      </View>
+      <AddPostScreen></AddPostScreen>
     </View>
   );
 }
@@ -61,8 +60,7 @@ function SearchStack() {
     <Stack.Navigator>
       <Stack.Screen name="Recherche" component={SearchScreen} options={{ title: 'Recherche' }} />
     </Stack.Navigator>
-  );
-}
+  )}
 
 export default function App() {
   return (
@@ -71,7 +69,7 @@ export default function App() {
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, size }) => {
             let iconName;
-            let color = focused ? 'blue' : 'black';
+            let color = focused ? 'blue' : 'gray';
 
             if (route.name === 'Recherche') {
               iconName = 'search';
@@ -82,7 +80,7 @@ export default function App() {
                 <View style={styles.addButton}>
                   <Ionicons name="add-circle" size={30} color={color} />
                 </View>
-            );
+              );
             } else if (route.name === 'Profil') {
               iconName = 'person';
             }
@@ -92,9 +90,9 @@ export default function App() {
         })}
         tabBarOptions={{
           activeTintColor: 'blue',
-          inactiveTintColor: 'black',
+          inactiveTintColor: 'gray',
           style: {
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            backgroundColor: '#f5f5f5', // Fond gris très clair
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
             borderWidth: 1,
@@ -103,17 +101,13 @@ export default function App() {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            shadowColor: 'black',
-            shadowOffset: { width: 0, height: 3 },
-            shadowOpacity: 0.2,
-            shadowRadius: 5,
             elevation: 5,
           },
         }}>
-        <Tab.Screen name="Recherche" component={SearchStack} options={{ headerShown: false }}/>
-        <Tab.Screen name="Accueil" component={HomeScreen} options={{ headerShown: false }}/>
-        <Tab.Screen name="Ajout" component={MiddleScreen} options={{ headerShown: false }}/>
-        <Tab.Screen name="Profil" component={ProfileScreen} options={{ headerShown: false }}/>
+        <Tab.Screen name="Recherche" component={SearchStack} options={{ headerShown: false }} />
+        <Tab.Screen name="Accueil" component={HomeScreen} />
+        <Tab.Screen name="Ajout" component={MiddleScreen} options={{ headerShown: false }} />
+        <Tab.Screen name="Profil" component={ProfileScreen} options={{ headerShown: false }} />
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -124,30 +118,23 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 10,
+    backgroundColor: '#f5f5f5', // Fond gris très clair
+    borderRadius: 20,
   },
   middleContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)', // Fond sombre
     borderRadius: 15,
     margin: 10,
     padding: 10,
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
     elevation: 5,
   },
   addButton: {
-    backgroundColor: 'blue',
+    backgroundColor: 'transparent',
     borderRadius: 50,
     padding: 10,
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 5,
   },
   input: {
     width: 200,
@@ -157,5 +144,7 @@ const styles = StyleSheet.create({
     margin: 10,
     paddingHorizontal: 10,
     borderRadius: 15,
+    backgroundColor: 'white',
+    elevation: 5,
   },
 });
