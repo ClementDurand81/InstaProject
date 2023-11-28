@@ -15,9 +15,19 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Besoin de votre permission pour utiliser la caméra",
+        "NSPhotoLibraryUsageDescription": "Besoin de votre permission pour accéder à la galerie",
+        "NSPhotoLibraryAddUsageDescription": "Besoin de votre permission pour sauvegarder des images dans la galerie"
+      }
     },
     "android": {
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
