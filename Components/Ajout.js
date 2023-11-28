@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { launchCamera } from 'react-native-image-picker';
 
 export default function AddPostScreen({ navigation }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
+  const takePhoto = () => {
+    launchCamera(photoOption)
+    .then(currentPhoto => {
+      setPhoto(currentPhoto.assets[0])
+    })
+  };
+
+  const photoOption = { maxHeight: 1000,maxWidth: 1000,
+    mediaType: 'photo'};
+    
   const handleAddPost = () => {
   };
 
