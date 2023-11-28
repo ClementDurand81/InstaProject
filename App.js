@@ -118,14 +118,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 10,
-    backgroundColor: '#f5f5f5', // Fond gris très clair
+    backgroundColor: '#f5f5f5',
     borderRadius: 20,
   },
   middleContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.7)', // Fond sombre
+    backgroundColor: 'rgba(255, 255, 255, 0.7)', 
     borderRadius: 15,
     margin: 10,
     padding: 10,
